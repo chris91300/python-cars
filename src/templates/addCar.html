@@ -1,39 +1,38 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <LINK rel=stylesheet type="text/css" href="/static/style.css">
-    
-    <title>Car</title>
-</head>
-<body>
-    <main>
-        <h1>Bienvenue dans <span>CARSSSS</span></h1>
-        <h2>ajouter une voiture à la collection</h2>
-        {% if error %}
+{% include "templateTop.html" %}
 
+<main id="add_car">
+    <h1>ajouter une voiture à la collection</h1>
+    {% if error %}
+
+    <div class="error_container">
         <p>Une erreur est survenu</p>
         <p>{{ errorMessage }}</p>
+    </div>
 
-        {%elif saved %}
-        <p>voiture créée!</p>
+    {%elif saved %}
+    <div class="success_container">
+        <p>✅ voiture créée</p>        
+    </div>
+    
+    <a href="/cars/add">ajouter une voiture</a>
 
-        {% else %}
+    {% else %}
 
-        <form method="POST" action="/cars">
+    <form method="POST" action="/cars">
+        <div>
             <label for="brand">marque</label>
-            <input id="brand" name="brand" placeholder="une marque"/>
+            <input id="brand" name="brand" placeholder="une marque" required/>
+        </div>
 
+        <div>
             <label for="model">modèle</label>
-            <input id="model" name="model" placeholder="un modèle"/>
+            <input id="model" name="model" placeholder="un modèle" required/>
+        </div>
+        <input type="submit" value="envoyer" class="add_button"/>
+    </form>
 
-            <input type="submit" value="envoyer" />
-        </form>
+    {% endif %}
 
-        {% endif %}
+</main>
 
-        <a href="/">accueil</a>
-    </main>
-</body>
-</html>
+{% include 'templateBottom.html' %}

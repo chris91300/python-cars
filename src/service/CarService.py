@@ -17,20 +17,32 @@ class CarService:
         connection.close()
         return cars
     
+    def findAllBrand(self):
+        connection = self.databaseService.get_connection()
+        cursor = connection.cursor()
+
+        cursor.execute('SELECT brand FROM car GROUP BY brand ORDER BY brand')
+        cars = cursor.fetchall()
+
+        cursor.close()
+        connection.close()
+        return cars
+    
 
     def findById(self, id):
         connection = self.databaseService.get_connection()
         cursor = connection.cursor()
-        cursor.execute('SELECT * FROM car WHERE car_id=%s' % id)
+        cursor.execute('SELECT * FROM car WHERE car_id=%s', (id,))
         car = cursor.fetchall()
+        car = [dict(row) for row in car]
         cursor.close()
         connection.close()
-        return car
+        return car[0]
     
     def findByBrand(self, brand):
         connection = self.databaseService.get_connection()
         cursor = connection.cursor()
-        cursor.execute('SELECT * FROM car WHERE brand=%s' % brand)
+        cursor.execute('SELECT * FROM car WHERE brand=%s', (brand,))
         cars = cursor.fetchall()
         cursor.close()
         connection.close()
@@ -44,6 +56,7 @@ class CarService:
         cursor.execute('INSERT INTO car (brand, model) VALUES(%s, %s) RETURNING *', (brand, model) )
         car = cursor.fetchall()
 
+        connection.commit()
         cursor.close()
         connection.close()
         return car
@@ -53,9 +66,10 @@ class CarService:
         connection = self.databaseService.get_connection()
         cursor = connection.cursor()
         
-        cursor.execute('UPDATE car SET brand=%s, model=%s WHERE car_id=%s RETURNING *' % (brand, model, id) )
-        car = cursor.fetchall()
+        cursor.execute('UPDATE car SET brand=%s, model=%s WHERE car_id=%s RETURNING *', (brand, model, id) )
+        car = cursor.fetchone()
 
+        connection.commit()
         cursor.close()
         connection.close()
         return car
@@ -65,12 +79,13 @@ class CarService:
         connection = self.databaseService.get_connection()
         cursor = connection.cursor()
 
-        cursor.execute('DELETE FROM car WHERE id=%s', (id,))
-        car = cursor.fetchall()
+        cursor.execute('DELETE FROM car WHERE car_id = %s RETURNING *', (id,))
+        carDeleted = cursor.fetchone()
 
+        connection.commit()
         cursor.close()
         connection.close()
-        return car
+        return carDeleted
     
 
 

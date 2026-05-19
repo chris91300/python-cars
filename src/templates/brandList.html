@@ -1,8 +1,13 @@
-{% include "templateTop.html" %}
+{% include 'templateTop.html' %}
 
 <main>
-    <h1>Nos voitures</h1>
-    {% if cars|length > 0 %}
+    <h1>Bienvenue dans <span>CARSSSS</span></h1>
+    <h2>Nos {{ brand }}</h2>
+    {% if cars|length < 1 %}
+    <p>Désole nous n'avons pas de {{ brand }}</p>
+
+    {% else %}
+
     <ul class="car_list">
     {% for car in cars %}
     <li class="car">
@@ -12,9 +17,6 @@
     </li>
     {% endfor %}
     </ul>
-    {% else %}        
-    <p>Nous n'avons pas de voiture pour le moment.</p>
-
     {% endif %}
 </main>
 

@@ -1,25 +1,21 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <LINK rel=stylesheet type="text/css" href="/static/style.css">
-    
-    <title>Car</title>
-</head>
-<body>
-    <main>
-        <h1>Bienvenue dans <span>CARSSSS</span></h1>
-        <nav>
-            <ul>
-                <li>
-                    <a href="/cars">voir nos voitures</a>
-                </li>
-                <li>
-                    <a href="/cars/add">ajouter une voiture</a>
-                </li>
-            </ul>
-        </nav>
-    </main>
-</body>
-</html>
+{% include "templateTop.html" %}
+
+<main>
+    <h1>Bienvenue dans <span>CARSSSS</span></h1>
+    <h2>Que veux-tu faire Bastien ?</h2>
+    <ul class="choice_list">
+        <li>
+            <a href="/cars">voir nos voitures</a>
+        </li>
+        {% for brand in brandList %}
+        <li>
+            <a href="/cars/brand/{{brand.brand}}">voir nos {{ brand.brand }}</a>
+        </li>
+        {% endfor %}
+        <li>
+            <a href="/cars/add">ajouter une voiture</a>
+        </li>
+    </ul>
+</main>
+
+{% include 'templateBottom.html' %}

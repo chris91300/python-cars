@@ -1,0 +1,28 @@
+{% include "templateTop.html" %}
+
+<main id="add_car">
+    <h1>Modifier une voiture de la collection</h1>
+    
+
+    <form>
+        <div>
+            <label for="brand">marque</label>
+            <input id="brand" name="brand" placeholder="une marque" value="{{car.brand}}"/>
+        </div>
+
+        <div>
+            <label for="model">modèle</label>
+            <input id="model" name="model" placeholder="un modèle" value="{{car.model}}"/>
+        </div>
+
+        <input type="hidden" value="{{car.car_id}}" />
+        <button type="submit" class="submit_button" id="submit_button">
+            envoyer
+        </button>
+
+    </form>
+
+
+</main>
+<script src="/static/js/update.js" ></script>
+{% include 'templateBottom.html' %}

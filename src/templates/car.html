@@ -1,17 +1,26 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <LINK rel=stylesheet type="text/css" href="/static/style.css">
+{% include "templateTop.html" %}
+
+<main id="car_main">
+    <h1>Voiture</h1>
+
+    <section>
     
-    <title>Car</title>
-</head>
-<body>
-    <main>
-        <h1>Bienvenue dans <span>CARSSSS</span></h1>
         <p>{{ "marque"|upper }}: {{ car.brand }}</p>
         <p>{{ "modèle"|upper }}: {{ car.model }}</p>
-    </main>
-</body>
-</html>
+
+        <div class="button_container">
+            <a class="update_button" href="/cars/update/{{car.car_id}}">modifier</a>
+            <form>
+                <input type="hidden" value="{{ car.car_id }}" />
+                <button type="submit" class="delete_button" id="delete_button">
+                    supprimer
+                </button>
+        </form>
+        </div>
+        
+
+    </section>
+</main>
+<script src="/static/js/delete.js" ></script>
+
+{% include 'templateBottom.html' %}
