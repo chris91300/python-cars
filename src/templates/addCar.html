@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <LINK rel=stylesheet type="text/css" href="/static/style.css">
+    
+    <title>Car</title>
+</head>
+<body>
+    <main>
+        <h1>Bienvenue dans <span>CARSSSS</span></h1>
+        <h2>ajouter une voiture à la collection</h2>
+        {% if error %}
+
+        <p>Une erreur est survenu</p>
+        <p>{{ errorMessage }}</p>
+
+        {%elif saved %}
+        <p>voiture créée!</p>
+
+        {% else %}
+
+        <form method="POST" action="/cars">
+            <label for="brand">marque</label>
+            <input id="brand" name="brand" placeholder="une marque"/>
+
+            <label for="model">modèle</label>
+            <input id="model" name="model" placeholder="un modèle"/>
+
+            <input type="submit" value="envoyer" />
+        </form>
+
+        {% endif %}
+
+        <a href="/">accueil</a>
+    </main>
+</body>
+</html>

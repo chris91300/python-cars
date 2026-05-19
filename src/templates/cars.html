@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car</title>
+</head>
+<body>
+    <main>
+        <h1>Bienvenue dans <span>CARSSSS</span></h1>
+        {% if cars|length > 0 %}
+        <ul>
+        {% for car in cars %}
+        <a href="/cars/{{car.id}}">{{ car.brand }} : {{ car.model }}</a>
+
+        {% endfor %}
+        </ul>
+        {% else %}        
+        <p>Nous n'avons pas de voiture pour le moment.</p>
+        
+        {% endif %}
+    </main>
+</body>
+</html>
